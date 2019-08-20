@@ -18,7 +18,7 @@
 
 	<script src="_framework/blazor.server.js"></script>
 	<script>
-		window.scrollToElementId = (elementId) => {
+		window.scrollToElementId = (elementId, parentId) => {
 			console.info('scrolling to element', elementId);
 			var element = document.getElementById(elementId);
             if(!element)
@@ -27,7 +27,7 @@
                 return false;
             }
 			element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
-
+			document.getElementById(parentId).scrollTop += 500;
             return true;
         }
 	</script>

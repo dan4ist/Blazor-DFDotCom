@@ -108,6 +108,13 @@ app {
     top: -2px;
 }
 
+.sidebar-links {
+	position: absolute;
+	bottom: 0;
+	left: 35px;
+	padding-bottom: 10px;
+}
+
 .nav-item {
 	font-size: 0.9rem;
 	padding-bottom: 0.5rem;
@@ -130,10 +137,11 @@ app {
 		align-items: center;
 		line-height: 3rem;
 	}
-	
+
 		.nav-item a.active {
 			background-color: rgba(255,255,255,0.25);
 			color: #353535;
+			text-shadow: 1px 1px 1px #568EA3;
 		}
 
 		.nav-item a:hover {
@@ -179,6 +187,15 @@ app {
 	.main .top-row {
         display: none;
     }
+	.sidebar {
+		background-image: none;
+		background-color: #4FB0C6;
+		padding-bottom: 5px;
+	}
+
+	.sidebar-links {
+		display:none;
+	}
 }
 
 @media (min-width: 768px) {

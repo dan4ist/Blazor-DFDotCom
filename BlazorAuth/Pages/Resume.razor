@@ -4,6 +4,9 @@
 
 <h2>
 	Daniel T. Forrest
+	&nbsp;
+	<a href="https://www.linkedin.com/in/danforrest/" target="_blank"><img src="/linkedin.svg" width="32" height="32" /></a>
+	<a href="https://github.com/dan4ist" target="_blank"><img src="/github.svg" width="32" height="32" /></a>
 </h2>
 <ul class="nav nav-pills">
 	<li class="margin-r5">
@@ -20,19 +23,22 @@
 	</li>
 </ul>
 <hr />
-<small>
-	Santa Cruz, CA
-</small>
+<div class="row">
+	<div class="col-md-2">
+		<small>
+			Santa Cruz, CA
+		</small>
+		<br />
+		<small>
+			<a href="mailto:dan4ist@gmail.com">dan4ist@gmail.com</a>
+		</small>
+	</div>
+</div>
 <br />
-<small>
-	<a href="mailto:dan4ist@gmail.com">dan4ist@gmail.com</a>
-</small>
-<br />
-<br />
-<div class="container">
-	<div id="edu" class="row">
-		<h3 class="resume-header">Education</h3>
-		<div class="col-md-10 offset-1">
+<div id="resume_container" class="container-fluid">
+	<h3 id="edu" class="resume-header">Education</h3>
+	<div class="row">
+		<div class="col-md-7 offset-1">
 			<p>
 				<strong>B.S. in Computer Science</strong>, University of Miami, Coral Gables, Florida (2009)
 				<br />
@@ -43,9 +49,9 @@
 			</p>
 		</div>
 	</div>
-	<div id="years" class="row">
-		<h3 class="resume-header">Years of Experience</h3>
-		<div class="col-md-10 offset-1">
+	<h3 id="years" class="resume-header">Years of Experience</h3>
+	<div class="row">
+		<div class="col-md-7 offset-1">
 			<ul>
 				<li>
 					Sixteen years total experience programming with various languages including C#, JavaScript, HTML, CSS, SQL <small>(and many others in varying degrees)</small>.
@@ -62,9 +68,9 @@
 			</ul>
 		</div>
 	</div>
-	<div id="tech" class="row">
-		<h3 class="resume-header">Technical Skills</h3>
-		<div class="col-md-10 offset-1">
+	<h3 id="tech" class="resume-header">Technical Skills</h3>
+	<div class="row">
+		<div class="col-md-7 offset-1">
 			<p><strong>Software: </strong> SQL Server Management Studio, Visual Studio, SharePoint, Webstorm</p>
 			<p><strong>Frameworks &amp; Libraries: </strong> React, Blazor, .Net (Web Forms/MVC/Core), Dapper, jQuery, Bootstrap, HighCharts, Google Charts, Aspose</p>
 			<p><strong>Certifications: </strong> CompTIA Security+, CompTIA Network+, ITIL v3 Foundation</p>
@@ -72,13 +78,13 @@
 	</div>
 	<h3 id="hist" class="resume-header">Employment History</h3>
 	<div class="row">
-		<div class="col-md-10 offset-1">
+		<div class="col-md-7 offset-1">
 			<div>
 				<h5><strong>AMERICAN INSTITUTES FOR RESEARCH</strong></h5> Washington, D.C. (May 2017 - Present)
 				<em>Senior Solutions Architect</em>
 				<ul>
 					<li>
-						Lead developer and architect of 13 separate applications, services, and integrations within the organization to include: payroll, performance management, international travel, employee benefits, office expansion/planning, ticketing, 
+						Lead developer and architect of 13 separate applications, services, and integrations within the organization to include: payroll, performance management, international travel, employee benefits, office expansion/planning, ticketing,
 						and human resources process automation.
 					</li>
 					<li>
@@ -135,7 +141,7 @@
 						Charter member of the Enterprise Collaboration Service initiative to bring 800+ disparate SharePoint instances within the Army into a single managed service.
 					</li>
 					<li>
-						Responded to network security issues, classified information spillages, and violations of Army Regulation (AR) 25-2 as well as incidents reported 
+						Responded to network security issues, classified information spillages, and violations of Army Regulation (AR) 25-2 as well as incidents reported
 						from the Regional Computer Emergency Response Team (RCERT) and CONUS – Theater Network Operations Security Center (C-TNOSC) from Ft. Carson, CO.
 					</li>
 					<li>
@@ -163,7 +169,7 @@
 		//base.OnInitializedAsync();
 		uriHelper.OnLocationChanged += NavigateToElement;
 	}
-	
+
 	private void OnLocationChanges(object sender, LocationChangedEventArgs e) => NavigateToElement(sender, e);
 	private void NavigateToElement(object sender, LocationChangedEventArgs e) {
 		var url = uriHelper.GetAbsoluteUri();
@@ -183,6 +189,6 @@
 	}
 
 	private Task<bool> ScrollToElementId(string elementId) {
-		return jsRuntime.InvokeAsync<bool>("scrollToElementId", elementId);
+		return jsRuntime.InvokeAsync<bool>("scrollToElementId", elementId, "resume_container");
 	}
 }
