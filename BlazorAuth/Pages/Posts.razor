@@ -1,0 +1,63 @@
+﻿@page "/posts"
+@using BlazorAuth.Models;
+@using BlazorAuth.Services;
+@using Markdig;
+@using Microsoft.AspNetCore.Html;
+@inject BlogService BlogService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IUriHelper uriHelper
+
+<h2>Posts</h2>
+<hr />
+@if (blogs == null) {
+	<div class="row">
+		<div class="col-md-12">
+			<p>Loading...</p>
+		</div>
+	</div>
+} else {
+	@foreach (var blog in blogs) {
+		<div class="row">
+			<div class="col-md-12">
+				<h4>
+					<span class="oi oi-bookmark" aria-hidden="true"></span>
+					@blog.Title
+					<small>
+						<small>
+							@if (blog.Updated.Year != 1) {
+								@blog.Updated.ToShortDateString()
+							} else {
+								@blog.Created.ToShortDateString()
+							}
+						</small>
+					</small>
+				</h4>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8">
+				@((MarkupString)blog.HTMLContent)
+				<hr />
+			</div>
+		</div>
+	}
+}
+
+@code {
+	IList<Models.Blog> blogs;
+
+	protected override async Task OnInitializedAsync() {
+		var authstate = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+		var user = authstate.User;
+
+		if (user.Identity.IsAuthenticated) {
+			Console.WriteLine($"{user.Identity.Name} is authenticated.");
+		} else {
+			//Console.WriteLine("The user is NOT authenticated.");
+			//uriHelper.NavigateTo(@"\");
+		}
+
+
+		blogs = await BlogService.GetAllBlogs();
+	}
+}

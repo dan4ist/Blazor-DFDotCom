@@ -1,0 +1,9 @@
+﻿CREATE TABLE [blog] (
+	[id] int identity(1,1) primary key not null,
+	[username] varchar(255),
+	[title] varchar(255),
+	[content] varchar(max),
+	[created] datetime
+)
+
+https://fonts.google.com/?selection.family=Nunito:300

@@ -1,0 +1,170 @@
+﻿@page "/blogadmin"
+@using BlazorAuth.Models
+@using BlazorAuth.Services
+@using Markdig;
+@using Microsoft.AspNetCore.Html;
+@inject BlogService BlogService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IUriHelper uriHelper
+
+<h4>Blog Administration</h4>
+
+<div class="row">
+	<div class="col-md-8">
+		<div class="form-group">
+			<input @bind="b.Title" class="form-control" placeholder="Title" />
+		</div>
+		<div class="form-group">
+			<textarea @bind="b.Content" class="form-control" rows="3" placeholder="Content"></textarea>
+			@*<textarea @bind-Value="@b.Content" @bind-Value:event="oninput" class="form-control" rows="3" placeholder="Content" @onchange="RenderHTML"></textarea>*@
+		</div>
+		<div class="form-group">
+			<button id="btn_create" @onclick="CreateBlog" class="btn btn-primary">@createBtnText</button>&nbsp;
+			<a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Markdown cheatsheet</a>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="form-group">
+			<button @onclick="RenderHTML" class="btn btn-block btn-outline-primary">Render Post as HTML</button>
+			<hr />
+			@((MarkupString)@blogHTML)
+		</div>
+	</div>
+</div>
+
+@if (blogs == null) {
+	<div class="row">
+		<div class="col-md-12">
+			<p>Loading...</p>
+		</div>
+	</div>
+} else {
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table">
+				<thead  class="thead-dark">
+					<tr>
+						<th>ID</th>
+						<th>User ID</th>
+						<th>Title</th>
+						<th>HTML Content</th>
+						@*<th>Markdown Content</th>*@
+						<th>Update</th>
+						<th>Delete</th>
+						<th>Created/Updated</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var blog in blogs) {
+					<tr>
+						<td valign="top">@blog.ID</td>
+						<td valign="top">@blog.Username</td>
+						<td valign="top">@blog.Title</td>
+						<td style="max-width: 500px;">
+							<div>
+								@((MarkupString)blog.HTMLContent)
+							</div>
+						</td>
+						@*<td>@blog.Content</td>*@
+						<td valign="top">
+							<button @onclick="(() => UpdateBlog(blog))" class="btn btn-outline-info">Update</button>
+						</td>
+						<td valign="top">
+							<button @onclick="(() => DeleteBlog(blog.ID))" class="btn btn-danger">Delete</button>
+						</td>
+						<td valign="top">
+							@if (blog.Updated.Year == 1) {
+								<small>@blog.Created.ToString("M/d/y h:mm tt") &nbsp;<small>(c)</small></small>
+							} else {
+								<small>@blog.Updated.ToString("M/d/y h:mm tt") &nbsp;<small>(u)</small></small>
+							}
+						</td>
+					</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+}
+
+
+
+@code {
+	IList<Models.Blog> blogs;
+	private Models.Blog b = new Models.Blog();
+	private string blogHTML;
+	private string createBtnText = "Create";
+
+	protected override async Task OnInitializedAsync() {
+		var authstate = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+		var user = authstate.User;
+
+		if (user.Identity.IsAuthenticated) {
+			Console.WriteLine($"{user.Identity.Name} is authenticated.");
+		} else {
+			Console.WriteLine("The user is NOT authenticated.");
+			uriHelper.NavigateTo(@"\");
+		}
+
+
+		blogs = await BlogService.GetBlogsByUserID(user.Identity.Name);
+	}
+
+	private async void CreateBlog() {
+		var authstate = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+		var user = authstate.User;
+
+		try { 
+			//update if ID > 0
+			if (b.ID > 0) {
+				b.Username = user.Identity.Name;
+				b = await BlogService.CreateBlog(b);
+				blogs = blogs.Where(x => x.ID != b.ID).ToList();
+				blogs.Add(b);
+			} else {	//otherwise create new blog
+				b.Username = user.Identity.Name;
+				b = await BlogService.CreateBlog(b);
+				blogs.Add(b);
+			}
+
+			blogHTML = "";
+			b = new Models.Blog();
+			StateHasChanged();
+		} catch (Exception ex) {
+			System.Console.WriteLine("ERROR: " + ex.Message);
+		}
+	}
+
+	private async void DeleteBlog(int id) {
+		bool deleted = await BlogService.DeleteBlog(id);
+		if (deleted) {
+			blogs = blogs.Where(x => x.ID != id).ToList();
+			StateHasChanged();
+		} else {
+			System.Console.WriteLine("Error deleting blog post.");
+		}
+	}
+
+	private void UpdateBlog(Models.Blog blog) {
+		b.ID = blog.ID;
+		b.Title = blog.Title;
+		b.Content = blog.Content;
+		b.Username = blog.Username;
+		createBtnText = "Update";
+		StateHasChanged();
+	}
+
+	private void RenderHTML() {
+		try {
+			blogHTML = BuildHtmlFromMarkdown(b.Content);
+			System.Console.WriteLine("html rendered");
+		} catch (Exception ex) {
+			Console.WriteLine("content is null " + ex.Message);
+		}
+	}
+
+	private string BuildHtmlFromMarkdown(string value) => Markdig.Markdown.ToHtml(
+		markdown: value,
+		pipeline: new MarkdownPipelineBuilder().UseAdvancedExtensions().Build()
+	);
+}

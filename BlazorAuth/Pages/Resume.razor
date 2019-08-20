@@ -1,0 +1,188 @@
+﻿@page "/resume"
+@inject IUriHelper uriHelper
+@inject IJSRuntime jsRuntime
+
+<h2>
+	Daniel T. Forrest
+</h2>
+<ul class="nav nav-pills">
+	<li class="margin-r5">
+		<a id="btn_edu" href="resume/#edu" class="btn btn-sm btn-outline-info">Education</a>
+	</li>
+	<li class="margin-r5">
+		<a id="btn_years" href="resume/#years" class="btn btn-sm btn-outline-info">Years of Experience</a>
+	</li>
+	<li class="margin-r5">
+		<a id="btn_tech" href="resume/#tech" class="btn btn-sm btn-outline-info">Technical Skills</a>
+	</li>
+	<li class="margin-r5">
+		<a id="btn_hist" href="resume/#hist" class="btn btn-sm btn-outline-info">Employment History</a>
+	</li>
+</ul>
+<hr />
+<small>
+	Santa Cruz, CA
+</small>
+<br />
+<small>
+	<a href="mailto:dan4ist@gmail.com">dan4ist@gmail.com</a>
+</small>
+<br />
+<br />
+<div class="container">
+	<div id="edu" class="row">
+		<h3 class="resume-header">Education</h3>
+		<div class="col-md-10 offset-1">
+			<p>
+				<strong>B.S. in Computer Science</strong>, University of Miami, Coral Gables, Florida (2009)
+				<br />
+				<small>Minor in Mathematics</small>
+			</p>
+			<p>
+				<strong>M.P..S. in Technology Management</strong>, Georgetown University, Washington, D.C. (2015)
+			</p>
+		</div>
+	</div>
+	<div id="years" class="row">
+		<h3 class="resume-header">Years of Experience</h3>
+		<div class="col-md-10 offset-1">
+			<ul>
+				<li>
+					Sixteen years total experience programming with various languages including C#, JavaScript, HTML, CSS, SQL <small>(and many others in varying degrees)</small>.
+				</li>
+				<li>
+					Nine years of experience with Microsoft SharePoint administration & development.
+				</li>
+				<li>
+					Seven years of experience developing prototypes for various projects.
+				</li>
+				<li>
+					Seven years of experience utilizing .NET with various frameworks (Web Forms, MVC, Core, Blazor).
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div id="tech" class="row">
+		<h3 class="resume-header">Technical Skills</h3>
+		<div class="col-md-10 offset-1">
+			<p><strong>Software: </strong> SQL Server Management Studio, Visual Studio, SharePoint, Webstorm</p>
+			<p><strong>Frameworks &amp; Libraries: </strong> React, Blazor, .Net (Web Forms/MVC/Core), Dapper, jQuery, Bootstrap, HighCharts, Google Charts, Aspose</p>
+			<p><strong>Certifications: </strong> CompTIA Security+, CompTIA Network+, ITIL v3 Foundation</p>
+		</div>
+	</div>
+	<h3 id="hist" class="resume-header">Employment History</h3>
+	<div class="row">
+		<div class="col-md-10 offset-1">
+			<div>
+				<h5><strong>AMERICAN INSTITUTES FOR RESEARCH</strong></h5> Washington, D.C. (May 2017 - Present)
+				<em>Senior Solutions Architect</em>
+				<ul>
+					<li>
+						Lead developer and architect of 13 separate applications, services, and integrations within the organization to include: payroll, performance management, international travel, employee benefits, office expansion/planning, ticketing, 
+						and human resources process automation.
+					</li>
+					<li>
+						Built full-stack .NET applications utilizing SQL backends, Bootstrap, jQuery, and AJAX for multiple applications.
+					</li>
+					<li>
+						Built multiple integrations from SQL databases to cloud-based applications via RESTful APIs.  Architected internal APIs for data retrieval by other corporate business systems.
+					</li>
+					<li>
+						Rebuilt internal bonus system reducing the application footprint by 10x.
+					</li>
+					<li>
+						Worked to migrate multiple on-premise applications into Azure (Microsoft Cloud).
+					</li>
+				</ul>
+			</div>
+			<div>
+				<h5><strong>DEFINITIVE LOGIC</strong></h5> Washington, D.C. (June 2012 - May 2017)
+				<em>Senior Software Developer</em>
+				<ul>
+					<li>
+						Led development of the Veterans Affairs (VA) Health Systems Planning Application (HSPA).
+						The HSPA was a .NET web forms application allowing Veteran Integrated Service Network (VISN) planners to track and manage veteran healthcare across the country.
+						The application utilized Spring and NHibernate for IoC and ORM, Aspose for report generation, jQuery, DataTables.js, and HighCharts.js for data visualization.
+					</li>
+					<li>
+						Led development of the HSPA application through multiple major releases and subsequent minor releases.
+						Integrated multiple databases and web services while reducing and simplifying the code base and incorporating new technologies into the legacy application.
+						Additionally, completed all Capability Maturity Model Integration (CMMI) Level 3 actions for the system.
+					</li>
+					<li>
+						Lead SharePoint developer for the VA Office of Quality, Safety, & Value (QSV) developing lessons learned capture mechanisms, a wiki site, and knowledgebase.
+						Additionally, migrated an entire site collection from SharePoint 2007 to 2010 and utilized SharePoint Designer ‘07/’10, SPServices, jQuery, CAML, XSLT, Bootstrap & custom scripts to aggregate & display lessons.
+					</li>
+					<li>
+						Interviewed dozens of candidates in-person and over the phone for positions in SharePoint, web, .NET development, quality assurance, and project management at Definitive Logic.
+					</li>
+					<li>
+						Led software development of a Microsoft .NET system for Employee Goals, Reviews and Compensation that integrates with the core Definitive Logic systems.
+						Led development through two major releases, three minor releases, and a successful CMMI Level 3 appraisal of the system.
+					</li>
+					<li>
+						Led SharePoint development implementing SharePoint 2007 solutions for VA Office of Health Information (OHI) Product Effectiveness group.
+						These solutions included multiple data view web parts utilizing HTML, CSS, jQuery, XSLT, and a custom-built SharePoint feature.
+						Led development of a client-side C# application to interact with data hosted within the VA SharePoint farm through SharePoint’s Web Services, incorporating Aspose report generation.
+					</li>
+				</ul>
+			</div>
+			<div>
+				<h5><strong>Headquarters, U.S. Department of Army, Chief Information Office (CIO)/G-6</strong></h5> Arlington, VA / Ft. Carson, CO (August 2009 - June 2012)
+				<em>IT Specialist</em>
+				<ul>
+					<li>
+						Charter member of the Enterprise Collaboration Service initiative to bring 800+ disparate SharePoint instances within the Army into a single managed service.
+					</li>
+					<li>
+						Responded to network security issues, classified information spillages, and violations of Army Regulation (AR) 25-2 as well as incidents reported 
+						from the Regional Computer Emergency Response Team (RCERT) and CONUS – Theater Network Operations Security Center (C-TNOSC) from Ft. Carson, CO.
+					</li>
+					<li>
+						Administered and customized multiple SharePoint site collections.
+					</li>
+					<li>
+						Completed multiple cost benefit analyses of Army enterprise license agreements with different vendors (Microsoft, Citrix, Symantec)
+					</li>
+					<li>
+						Created and managed Army service level agreements (SLA) with various vendors.
+					</li>
+					<li>
+						Improved wireless security on Ft. Carson through war-driving to find unauthorized networks on base.
+					</li>
+					<li>
+						Completed the Army Knowledge Leadership program with work rotations throughout CIO/G-6 in contract management, enterprise services, cybersecurity, and enterprise initiatives.
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+@code {
+	protected override void OnInitialized() {
+		//base.OnInitializedAsync();
+		uriHelper.OnLocationChanged += NavigateToElement;
+	}
+	
+	private void OnLocationChanges(object sender, LocationChangedEventArgs e) => NavigateToElement(sender, e);
+	private void NavigateToElement(object sender, LocationChangedEventArgs e) {
+		var url = uriHelper.GetAbsoluteUri();
+		var fragment = new Uri(url).Fragment;
+
+		if(string.IsNullOrEmpty(fragment)) {
+			return;
+		}
+
+		var elementId = fragment.StartsWith("#") ? fragment.Substring(1) : fragment;
+
+		if(string.IsNullOrEmpty(elementId)) {
+			return;
+		}
+
+		ScrollToElementId(elementId);
+	}
+
+	private Task<bool> ScrollToElementId(string elementId) {
+		return jsRuntime.InvokeAsync<bool>("scrollToElementId", elementId);
+	}
+}
